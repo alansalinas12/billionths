@@ -28,7 +28,7 @@ module.exports = function(passport, user) {
         function (req, accessToken, refreshToken, profile, done) {
             if (!req.user) {
 
-                User.findOrCreate(user).then(function (user) {
+                User.findOrCreate({googleId: profile.id}).then(function (user) {
 
                     if (user) {
                         return done(null, false);
