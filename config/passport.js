@@ -38,15 +38,26 @@ module.exports = function(passport, user) {
 
             } else {
 
-                var user = {
-                    googleId: profile.id,
-                    username: profile.displayName,
-                    money: 10000
-                };
+                User.findOne({
+                    where: {
+                        googleId: profile.id
+                    }
+                }),
+                    function (err, user) {
+                        if (!user) {
+                            var user = {
+                                googleId: profile.id,
+                                username: profile.displayName,
+                                money: 10000
+                            };
 
-                User.create(user).then(function (user) {
-                    return done(null, user);
-                });
+                            User.create(user).then(function (user) {
+                                return done(null, user);
+                            });
+                        } else {
+                            return done(null, user);
+                        }
+                }
             }
         }
     ));
