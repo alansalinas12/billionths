@@ -28,10 +28,15 @@ module.exports = function(passport, user) {
         function (req, accessToken, refreshToken, profile, done) {
             if (!req.user) {
 
-                User.findOrCreate({googleId: profile.id}).then(function (user) {
-
+                User.findOrCreate({
+                    where: {
+                        googleId: profile.id
+                    }
+                }),
+                    function (err, user) {
+                    
                     if (user) {
-                        return done(null, false);
+                        return done(null, user);
                     }
 
                     if (!user) {
@@ -43,15 +48,8 @@ module.exports = function(passport, user) {
                         };
                         return done(null, user);
                     }
-                });
-            } else {
-                User.findOne({
-                    where: {
-                        googleId: profile.id,
-                    }
-                });
-                return done(null, req.user);
-            }
+                };
+            } 
         }
     ));
 
