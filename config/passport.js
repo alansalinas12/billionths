@@ -26,46 +26,28 @@ module.exports = function(passport, user) {
             passReqToCallback: true
     	},
         function (req, accessToken, refreshToken, profile, done) {
-
-
             if (!req.user) {
+                var newUser = {
+                    googleId: profile.id,
+                    username: profile.displayName,
+                    money: 10000
+                };
 
+                User.create(newUser).then(function (newUser) {
+                    if (!newUser) {
+                        return done(null, false);
+                    }
+                    if (newUser) {
+                        return done(null, newUser);
+                    }
+                });
+            } else {
                 User.findOne({
                     where: {
-                        googleId: profile.id
+                        googleId: profile.id,
                     }
-                }),
-                    function (err, user) {
-
-                        if (!user) {
-                            var user = {
-                                googleId: profile.id,
-                                username: profile.displayName,
-                                money: 10000
-                            };
-
-                            User.create(user).then(function (user) {
-                                return done(null, user);
-                            });
-                        } else {
-                            return done(null, req.user);
-                        }
-
-                    };
-
-            } else {
-
-                    User.findOne({
-                        where: {
-                            googleId: profile.id
-                        }
-                    }),
-
-                    function (err, user) {
-
-                        return done(null, req.user);
-
-                    };
+                });
+                return done(null, req.user);
             }
         }
     ));
