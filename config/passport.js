@@ -35,7 +35,6 @@ module.exports = function(passport, user) {
                 if (user) {
                     return done(null, user.get());
                 } else {
-
                     var data = {
                         googleId: profile.id,
                         username: profile.displayName,
