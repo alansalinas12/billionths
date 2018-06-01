@@ -29,12 +29,6 @@ module.exports = function (app, passport) {
         }),
         function (req, res) {
 
-            var user = req.user;
-            var account = req.account;
-
-            console.log(user);
-            console.log(account);
-
             res.redirect('/profile');
         });
             

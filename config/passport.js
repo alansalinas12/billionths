@@ -28,28 +28,33 @@ module.exports = function(passport, user) {
         function (req, accessToken, refreshToken, profile, done) {
             if (!req.user) {
 
-                User.findOrCreate({
+                User.findOne({
                     where: {
                         googleId: profile.id
                     }
                 }),
                     function (err, user) {
-                    
-                    if (user) {
-                        return done(null, user);
-                    }
 
-                    if (!user) {
+                        if (user) {
+                            return done(null, user);
+                        }
 
-                        var user = {
-                            googleId: profile.id,
-                            username: profile.displayName,
-                            money: 10000
-                        };
-                        return done(null, user);
-                    }
-                };
-            } 
+                        if (!user) {
+
+                            var user = {
+                                googleId: profile.id,
+                                username: profile.displayName,
+                                money: 10000
+                            };
+
+                            User.create(user).then(function (user) {
+                                return done(null, user);
+                            });
+                        }
+                    };
+            } else {
+                return done(null, req.user);
+            }
         }
     ));
 
