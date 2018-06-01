@@ -33,7 +33,7 @@ module.exports = function(passport, user) {
                 }
             }).then(function (user) {
                 if (user) {
-                    return done(null, false);
+                    return done(null, user.get());
                 } else {
 
                     var data = {
