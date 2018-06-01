@@ -28,7 +28,13 @@ module.exports = function (app, passport) {
             failureRedirect: '/login'
         }),
         function (req, res) {
-            console.log(req.session);
+
+            var user = req.user;
+            var account = req.account;
+
+            console.log(user);
+            console.log(account);
+
             res.redirect('/profile');
         });
             
