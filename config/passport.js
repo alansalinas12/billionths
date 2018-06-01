@@ -30,8 +30,11 @@ module.exports = function(passport, user) {
 
             if (!req.user) {
 
-                User.findOne({ googleId: profile.id },
-
+                User.findOne({
+                    where: {
+                        googleId: profile.id
+                    }
+                }),
                     function (err, user) {
 
                         if (!user) {
@@ -48,17 +51,21 @@ module.exports = function(passport, user) {
                             return done(null, req.user);
                         }
 
-                    });
+                    };
 
             } else {
 
-                User.findOne({ googleId: profile.id },
+                    User.findOne({
+                        where: {
+                            googleId: profile.id
+                        }
+                    }),
 
                     function (err, user) {
 
                         return done(null, req.user);
 
-                    });
+                    };
             }
         }
     ));
