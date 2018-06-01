@@ -26,39 +26,33 @@ module.exports = function(passport, user) {
             passReqToCallback: true
     	},
         function (req, accessToken, refreshToken, profile, done) {
-            if (req.user) {
-                User.findOne({
-                    where: {
-                        googleId: profile.id
-                    }
-                }),
-                    function (err, user) {
-                            return done(null, user);
+
+            User.findOne({
+                where: {
+                    googleId: profile.id
+                }
+            }).then(function (user) {
+                if (user) {
+                    return done(null, false);
+                } else {
+
+                    var data = {
+                        googleId: profile.id,
+                        username: profile.displayName,
+                        money: 10000
                     };
 
-            } else {
-
-                User.findOne({
-                    where: {
-                        googleId: profile.id
-                    }
-                }),
-                    function (err, user) {
-                        if (!user) {
-                            var user = {
-                                googleId: profile.id,
-                                username: profile.displayName,
-                                money: 10000
-                            };
-
-                            User.create(user).then(function (user) {
-                                return done(null, user);
-                            });
-                        } else {
-                            return done(null, user);
+                    User.create(data).then(function (newUser, created) {
+                        if (!newUser) {
+                            return done(null, false);
                         }
+
+                        if (newUser) {
+                            return done(null, newUser);
+                        }
+                    });
                 }
-            }
+            })
         }
     ));
 
