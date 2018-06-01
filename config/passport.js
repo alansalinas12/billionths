@@ -27,18 +27,21 @@ module.exports = function(passport, user) {
     	},
         function (req, accessToken, refreshToken, profile, done) {
             if (!req.user) {
-                var newUser = {
-                    googleId: profile.id,
-                    username: profile.displayName,
-                    money: 10000
-                };
 
-                User.create(newUser).then(function (newUser) {
-                    if (!newUser) {
+                User.findOrCreate(user).then(function (user) {
+
+                    if (user) {
                         return done(null, false);
                     }
-                    if (newUser) {
-                        return done(null, newUser);
+
+                    if (!user) {
+
+                        var user = {
+                            googleId: profile.id,
+                            username: profile.displayName,
+                            money: 10000
+                        };
+                        return done(null, user);
                     }
                 });
             } else {
