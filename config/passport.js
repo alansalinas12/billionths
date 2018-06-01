@@ -35,17 +35,6 @@ module.exports = function(passport, user) {
                     money: 10000
                 };
 
-                var account = new Account();
-                account.domain = 'google.com';
-                account.uid = profile.id;
-
-                var t = {
-                    accessToken: accessToken,
-                    refreshToken: refreshToken
-                };
-
-                account.tokens.push(t);
-
                 User.create(user).then(function (user) {
 
                     return done(null, user);
