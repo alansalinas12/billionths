@@ -31,21 +31,7 @@ module.exports = function (app, passport) {
 
             res.redirect('/profile');
         });
-            
-    // POST ROUTES
-    // route for saving a new purchase
-    app.post("/api/transactions", function(req, res) {
-        console.log(req.body);
-        db.Transaction.create({
-            coin: req.body.coin,
-            coinId: req.body.coinId,
-            purchasePrice: req.body.purchasePrice,
-            purchaseAmount: req.body.purchaseAmount,
-            UserId: req.session.passport.user
-        }).then(function (dbTransaction) {
-            res.json(dbTransaction);
-        });
-    });     
+                 
 
     // Get user
     app.get("/api/user", function (req, res) {

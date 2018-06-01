@@ -41,35 +41,20 @@ module.exports = function (app) {
         });
     });
 
-
-
-
-
-
-    // POST route for creating a new user
-    app.post('/api/newUser', function (req, res) {
-        db.User.create({
-            username: req.body.username,
-            userId: req.body.userId,
-            money: req.body.money
+    // POST ROUTES
+    // route for saving a new purchase
+    app.post("/api/transactions", function (req, res) {
+        console.log(req.body);
+        db.Transaction.create({
+            coin: req.body.coin,
+            coinId: req.body.coinId,
+            purchasePrice: req.body.purchasePrice,
+            purchaseAmount: req.body.purchaseAmount,
+            UserId: req.session.passport.user
+        }).then(function (dbTransaction) {
+            res.json(dbTransaction);
         });
     });
-
-    // GET route for pulling user info
-    app.post('/api/userLogin', (req, res) => {
-        console.log("In the get command")
-        console.log(req.body)
-
-        db.User.findAll({
-            where: {
-                id: req.body.loginID
-            }
-        }).then(function (dbUser) {
-            res.json(dbUser);
-        })
-    })
-
-
 
     // DELETE ROUTES
     // delete route for devaring purchases. We can get the id of the purchase we want to delete from
