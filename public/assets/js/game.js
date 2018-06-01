@@ -49,7 +49,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (res) {
             updatedUser = {
-                userId: res.userId,
+                googleId: res.googleId,
                 username: res.username,
                 money: res.money
             };
