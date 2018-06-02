@@ -3,6 +3,7 @@ $(document).ready(function () {
     $(document).on('click', "#populateTransactions", getTransactions);
     $(document).on('click', ".deleteTransaction", deleteTransaction);
     $(document).on("click", "#buyTransaction", buyTransaction);
+    $(document).on("click", "#sellTransaction", sellTransaction);
 
     var cryptos;
     var coidId;
