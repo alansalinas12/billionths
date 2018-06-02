@@ -34,8 +34,11 @@ $(document).ready(function () {
 
     var transactions = [];
     var updatedUser;
+    var portfolioWorth;
+    var gains;
+    var totalWorth;
 
-    getUserHoldings();
+    updateUserHoldings();
 
     //Get all user transactions
     function getTransactions(event) {
@@ -113,6 +116,11 @@ $(document).ready(function () {
             $("#ada").html("ADA: " + updatedUser.ADA);
 
             portfolioWorthUpdate();
+
+            totalWorth = updatedUser.money + portfolioWorth;
+            gains = totalWorth - 10000;
+
+            $("#gains").html("$ " + gains);
         });
     }
 
@@ -128,7 +136,7 @@ $(document).ready(function () {
         var trxWorth = updatedUser.TRX * cryptos[1958].quotes.USD.price;
         var adaWorth = updatedUser.ADA * cryptos[2010].quotes.USD.price;
 
-        var portfolioWorth = btcWorth + ltcWorth + xrpWorth + xlmWorth + ethWorth + miotaWorth + eosWorth + bchWorth + trxWorth + adaWorth;
+        portfolioWorth = btcWorth + ltcWorth + xrpWorth + xlmWorth + ethWorth + miotaWorth + eosWorth + bchWorth + trxWorth + adaWorth;
 
         $("#portfolioWorth").html("$ " + portfolioWorth);
     }
