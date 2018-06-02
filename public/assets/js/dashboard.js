@@ -29,6 +29,9 @@ $(document).ready(function () {
             $("#coinName").html(`<h3>Current ${cryptos[coinId].name} Price:`);
             $("#coinPrice").html(`<h4 id="cryptoPrice">$${cryptos[coinId].quotes.USD.price}`);
         });
+
+        getUserHoldings();
+        getTransactions();
     });
 
     var interval = setInterval(displayWorth, 3000);
@@ -38,9 +41,6 @@ $(document).ready(function () {
     var portfolioWorth;
     var gains;
     var totalWorth;
-
-    getUserHoldings();
-    getTransactions();
 
     function displayWorth() {
         $("#cashAvailable").html("$ " + updatedUser.money);
