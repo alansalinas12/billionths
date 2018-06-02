@@ -178,6 +178,7 @@ $(document).ready(function () {
 
             $.post("/api/transactions", transaction).then(updateUserHoldings);
         }
+        getTransactions();
     };
 
     function sellTransaction(event) {
