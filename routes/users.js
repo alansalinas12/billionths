@@ -43,10 +43,20 @@ module.exports = function (app, passport) {
             });
     });
     
-    // Update user money
+    // Update user money and coins
     app.put("/api/user/:id", function(req, res) {
         db.User.update({
-            money: req.body.money
+            money: req.body.money,
+            BTC: req.body.BTC,
+            LTC: req.body.LTC,
+            XRP: req.body.XRP,
+            XLM: req.body.XLM,
+            ETH: req.body.ETH,
+            MIOTA: req.body.MIOTA,
+            EOS: req.body.EOS,
+            BCH: req.body.BCH,
+            TRX: req.body.TRX,
+            ADA: req.body.ADA
         }, {
             where: {
                 id: req.session.passport.user
@@ -55,4 +65,5 @@ module.exports = function (app, passport) {
             res.json(dbUser);
         });
     });
+
 }

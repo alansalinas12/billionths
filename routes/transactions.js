@@ -30,6 +30,9 @@ module.exports = function (app) {
         });
     });
 
+    // Get portfolio worth
+    
+
     // Get route for getting total number of a secific coin
     app.get("/api/transactions/:coin", function (req, res) {
         db.Transaction.findAll({

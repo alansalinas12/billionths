@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     var cryptos;
     var coidId;
+
     $.ajax({
         url: "https://api.coinmarketcap.com/v2/ticker/?limit=10",
         method: "GET"
@@ -34,7 +35,7 @@ $(document).ready(function () {
     var transactions = [];
     var updatedUser;
 
-    getUserMoney();
+    getUserHoldings();
 
     //Get all user transactions
     function getTransactions(event) {
@@ -76,7 +77,7 @@ $(document).ready(function () {
         });
     }
 
-    function getUserMoney(event) {
+    function getUserHoldings(event) {
         $.ajax({
             url: "/api/user",
             method: "GET"
@@ -84,19 +85,29 @@ $(document).ready(function () {
             updatedUser = {
                 googleId: res.googleId,
                 username: res.username,
-                money: res.money
+                money: res.money,
+                BTC: res.BTC,
+                LTC: res.LTC,
+                XRP: res.XRP,
+                XLM: res.XLM,
+                ETH: res.ETH,
+                MIOTA: res.MIOTA,
+                EOS: res.EOS,
+                BCH: res.BCH,
+                TRX: res.TRX,
+                ADA: res.ADA
             };
 
             $("#cashAvailable").html("$ " + updatedUser.money);
         });
     }
 
-    function updateUserMoney(event) {
+    function updateUserHoldings(event) {
         $.ajax({
             url: "/api/user/:id",
             type: "PUT",
             data: updatedUser
-        }).then(getUserMoney);
+        }).then(getUserHoldings);
     }
 
     // This function inserts a new transactions into our database
@@ -115,6 +126,8 @@ $(document).ready(function () {
             window.alert("Not enough money to complete transaction!")
         } else {
 
+            
+
             var transaction = {
                 coin: coinSymbol,
                 coinId: coinId,
@@ -123,8 +136,9 @@ $(document).ready(function () {
             };
 
             updatedUser.money -= transactionCost;
+            updatedUser.coinSymbol += coinAmount
 
-            $.post("/api/transactions", transaction).then(updateUserMoney);
+            $.post("/api/transactions", transaction).then(updateUserHoldings);
         }
     };
 });

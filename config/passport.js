@@ -38,7 +38,17 @@ module.exports = function(passport, user) {
                     var data = {
                         googleId: profile.id,
                         username: profile.displayName,
-                        money: 10000
+                        money: 10000,
+                        BTC: 0,
+                        LTC: 0,
+                        XRP: 0,
+                        XLM: 0,
+                        ETH: 0,
+                        MIOTA: 0,
+                        EOS: 0,
+                        BCH: 0,
+                        TRX: 0,
+                        ADA: 0
                     };
 
                     User.create(data).then(function (newUser, created) {
