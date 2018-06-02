@@ -11,3 +11,7 @@
 .nav > li {
     float: left;
 }
+
+#indexBody {
+    background-image: url("assets/img/bitcoin.jpg");
+}
