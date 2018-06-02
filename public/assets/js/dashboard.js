@@ -29,7 +29,7 @@ $(document).ready(function () {
             $("#coinName").html(`<h3>Current ${cryptos[coinId].name} Price:`);
             $("#coinPrice").html(`<h4 id="cryptoPrice">$${cryptos[coinId].quotes.USD.price}`);
         });
-    }); 
+    });
 
 
     var transactions = [];
@@ -38,7 +38,7 @@ $(document).ready(function () {
     var gains;
     var totalWorth;
 
-    getUserHoldings();
+    updateUserHoldings();
     getTransactions();
 
     function displayWorth() {
@@ -137,9 +137,11 @@ $(document).ready(function () {
             $("#trx").html("TRX: " + updatedUser.TRX);
             $("#ada").html("ADA: " + updatedUser.ADA);
 
-            }).then(function () {
-                displayWorth();
-            });
+            displayWorth();
+
+        }).then(function () {
+            displayWorth();
+        });
     }
 
     function updateUserHoldings(event) {
@@ -156,7 +158,7 @@ $(document).ready(function () {
 
         coinAmount = $("#coinAmount").val();
 
-        var purchasePrice = cryptos[coinId].quotes.USD.price;       
+        var purchasePrice = cryptos[coinId].quotes.USD.price;
         // Grab the symbol of the crypto being purchased
         var coinSymbol = cryptos[coinId].symbol;
         // Determine the cost of the overall transaction
@@ -165,8 +167,6 @@ $(document).ready(function () {
         if (updatedUser.money < transactionCost) {
             window.alert("Not enough money to complete transaction!")
         } else {
-
-            
 
             var transaction = {
                 coin: coinSymbol,
@@ -210,6 +210,4 @@ $(document).ready(function () {
             $.post("/api/transactions", transaction).then(updateUserHoldings);
         }
     }
-}).then(function () {
-    displayWorth();
 });
