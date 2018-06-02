@@ -30,7 +30,6 @@ $(document).ready(function () {
         });
     }); 
 
-    var money;
 
     var transactions = [];
     var updatedUser;
@@ -136,7 +135,7 @@ $(document).ready(function () {
             };
 
             updatedUser.money -= transactionCost;
-            updatedUser.coinSymbol += coinAmount
+            updatedUser[coinSymbol] += coinAmount;
 
             $.post("/api/transactions", transaction).then(updateUserHoldings);
         }
