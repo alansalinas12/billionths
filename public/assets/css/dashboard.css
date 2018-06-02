@@ -1,3 +1,7 @@
 #moneyStats {
     height: 80px;
 }
+
+.ticker {
+    max-height: 20px;
+}

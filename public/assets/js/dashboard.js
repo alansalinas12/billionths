@@ -98,6 +98,16 @@ $(document).ready(function () {
             };
 
             $("#cashAvailable").html("$ " + updatedUser.money);
+            $("#btc").html("BTC: " + updatedUser.BTC);
+            $("#ltc").html("LTC: " + updatedUser.LTC);
+            $("#xrp").html("XRP: " + updatedUser.XRP);
+            $("#xlm").html("XLM: " + updatedUser.XLM);
+            $("#eth").html("ETH: " + updatedUser.ETH);
+            $("#miota").html("MIOTA: " + updatedUser.MIOTA);
+            $("#eos").html("EOS: " + updatedUser.EOS);
+            $("#bch").html("BCH: " + updatedUser.BCH);
+            $("#trx").html("TRX: " + updatedUser.TRX);
+            $("#ada").html("ADA: " + updatedUser.ADA);
         });
     }
 
@@ -135,9 +145,38 @@ $(document).ready(function () {
             };
 
             updatedUser.money -= transactionCost;
-            updatedUser[coinSymbol] += coinAmount;
+            updatedUser[coinSymbol] += parseFloat(coinAmount);
 
             $.post("/api/transactions", transaction).then(updateUserHoldings);
         }
     };
+
+    function sellTransaction(event) {
+        event.preventDefault();
+
+        coinAmount = $("#coinAmount").val();
+
+        var purchasePrice = cryptos[coinId].quotes.USD.price;
+        // Grab the symbol of the crypto being purchased
+        var coinSymbol = cryptos[coinId].symbol;
+        // Determine the cost of the overall transaction
+        var transactionCost = purchasePrice * coinAmount
+
+        if (updatedUser[coinSymbol] < coinAmount) {
+            window.alert("Not enough coins to complete transaction!")
+        } else {
+
+            var transaction = {
+                coin: coinSymbol,
+                coinId: coinId,
+                purchasePrice: purchasePrice,
+                purchaseAmount: coinAmount
+            };
+
+            updatedUser.money += transactionCost;
+            updatedUser[coinSymbol] -= parseFloat(coinAmount);
+
+            $.post("/api/transactions", transaction).then(updateUserHoldings);
+        }
+    }
 });
