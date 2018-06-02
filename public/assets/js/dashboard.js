@@ -38,7 +38,7 @@ $(document).ready(function () {
     var gains;
     var totalWorth;
 
-    updateUserHoldings();
+    getUserHoldings();
     getTransactions();
 
     function displayWorth() {
@@ -119,6 +119,8 @@ $(document).ready(function () {
             var trxWorth = updatedUser.TRX * cryptos[1958].quotes.USD.price;
             var adaWorth = updatedUser.ADA * cryptos[2010].quotes.USD.price;
 
+        }).then(function () {
+
             portfolioWorth = btcWorth + ltcWorth + xrpWorth + xlmWorth + ethWorth + miotaWorth + eosWorth + bchWorth + trxWorth + adaWorth;
 
             totalWorth = updatedUser.money + portfolioWorth;
@@ -137,10 +139,9 @@ $(document).ready(function () {
             $("#trx").html("TRX: " + updatedUser.TRX);
             $("#ada").html("ADA: " + updatedUser.ADA);
 
-            displayWorth();
-
-        }).then(function () {
-            displayWorth();
+            $("#cashAvailable").html("$ " + updatedUser.money);
+            $("#gains").html("$ " + gains);
+            $("#portfolioWorth").html("$ " + portfolioWorth);
         });
     }
 
