@@ -12,5 +12,11 @@
     float: left;
 }
 
-body {
+body#indexBody {
+  background-image: url("../img/bitcoin.jpg");
+}
+
+#logo {
+    max-height: 50px;
+    max-width: 50px;
 }
