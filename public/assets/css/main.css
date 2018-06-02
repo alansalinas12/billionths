@@ -1,11 +1,9 @@
 .navbar .container-fluid > .navbar-header {
     float: left;
-    margin-right: 10px;
 }
 
 .navbar .navbar-nav {
     float: left;
-    margin: 5px;
 }
 
 .nav > li {
@@ -18,11 +16,10 @@ body#indexBody {
 }
 
 img#logo {
-    max-height: 66px;
-    max-width: 66px;
+
 }
 
 a.navbar-brand {
-    max-height: 66px;
-    max-width: 66px;
+    max-height: 80px;
+    max-width: 80px;
 }
