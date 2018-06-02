@@ -38,7 +38,7 @@ $(document).ready(function () {
     var gains;
     var totalWorth;
 
-    updateUserHoldings();
+    getUserHoldings();
 
     //Get all user transactions
     function getTransactions(event) {
@@ -117,10 +117,7 @@ $(document).ready(function () {
 
             portfolioWorthUpdate();
 
-            totalWorth = updatedUser.money + portfolioWorth;
-            gains = totalWorth - 10000;
 
-            $("#gains").html("$ " + gains);
         });
     }
 
@@ -138,6 +135,10 @@ $(document).ready(function () {
 
         portfolioWorth = btcWorth + ltcWorth + xrpWorth + xlmWorth + ethWorth + miotaWorth + eosWorth + bchWorth + trxWorth + adaWorth;
 
+        totalWorth = updatedUser.money + portfolioWorth;
+        gains = totalWorth - 10000;
+
+        $("#gains").html("$ " + gains);
         $("#portfolioWorth").html("$ " + portfolioWorth);
     }
 
