@@ -1,5 +1,3 @@
-import { clearInterval } from "timers";
-
 $(document).ready(function () {
 
     $(document).on('click', "#populateTransactions", getTransactions);
