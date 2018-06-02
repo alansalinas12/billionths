@@ -27,15 +27,14 @@ $(document).ready(function () {
             $("#coinName").html(`<h3>Current ${cryptos[coinId].name} Price:`);
             $("#coinPrice").html(`<h4 id="cryptoPrice">$${cryptos[coinId].quotes.USD.price}`);
         });
-    });
-
-    getUserMoney();
+    }); 
 
     var money;
 
     var transactions = [];
     var updatedUser;
 
+    getUserMoney();
 
     //Get all user transactions
     function getTransactions(event) {
@@ -88,7 +87,7 @@ $(document).ready(function () {
                 money: res.money
             };
 
-            $("#moneyAmount").html("$ " + updatedUser.money);
+            $("#cashAvailable").html("$ " + updatedUser.money);
         });
     }
 
