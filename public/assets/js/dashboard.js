@@ -41,6 +41,12 @@ $(document).ready(function () {
     getUserHoldings();
     getTransactions();
 
+    function displayWorth() {
+        $("#cashAvailable").html("$ " + updatedUser.money);
+        $("#gains").html("$ " + gains);
+        $("#portfolioWorth").html("$ " + portfolioWorth);
+    }
+
     //Get all user transactions
     function getTransactions(event) {
 
@@ -118,9 +124,7 @@ $(document).ready(function () {
             totalWorth = updatedUser.money + portfolioWorth;
             gains = totalWorth - 10000;
 
-            $("#cashAvailable").html("$ " + updatedUser.money);
-            $("#gains").html("$ " + gains);
-            $("#portfolioWorth").html("$ " + portfolioWorth);
+
             //Holdings
             $("#btc").html("BTC: " + updatedUser.BTC);
             $("#ltc").html("LTC: " + updatedUser.LTC);
@@ -133,7 +137,7 @@ $(document).ready(function () {
             $("#trx").html("TRX: " + updatedUser.TRX);
             $("#ada").html("ADA: " + updatedUser.ADA);
 
-        });
+        }).then(displayWorth);
     }
 
     function updateUserHoldings(event) {
