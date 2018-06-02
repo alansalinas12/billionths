@@ -14,12 +14,3 @@ body#indexBody {
   background-image: url("../img/bitcoin.jpg");
   background-size: cover;
 }
-
-img#logo {
-
-}
-
-a.navbar-brand {
-    max-height: 80px;
-    max-width: 80px;
-}
