@@ -1,3 +1,5 @@
+import { clearInterval } from "timers";
+
 $(document).ready(function () {
 
     $(document).on('click', "#populateTransactions", getTransactions);
@@ -31,6 +33,7 @@ $(document).ready(function () {
         });
     });
 
+    var interval = setInterval(displayWorth, 3000);
 
     var transactions = [];
     var updatedUser;
@@ -119,7 +122,6 @@ $(document).ready(function () {
             var trxWorth = updatedUser.TRX * cryptos[1958].quotes.USD.price;
             var adaWorth = updatedUser.ADA * cryptos[2010].quotes.USD.price;
 
-        }).then(function () {
 
             portfolioWorth = btcWorth + ltcWorth + xrpWorth + xlmWorth + ethWorth + miotaWorth + eosWorth + bchWorth + trxWorth + adaWorth;
 
@@ -139,9 +141,7 @@ $(document).ready(function () {
             $("#trx").html("TRX: " + updatedUser.TRX);
             $("#ada").html("ADA: " + updatedUser.ADA);
 
-            $("#cashAvailable").html("$ " + updatedUser.money);
-            $("#gains").html("$ " + gains);
-            $("#portfolioWorth").html("$ " + portfolioWorth);
+            displayWorth();
         });
     }
 
@@ -156,6 +156,8 @@ $(document).ready(function () {
     // This function inserts a new transactions into our database
     function buyTransaction(event) {
         event.preventDefault();
+
+        clearInterval(interval);
 
         coinAmount = $("#coinAmount").val();
 
