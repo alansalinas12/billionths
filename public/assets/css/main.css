@@ -16,7 +16,7 @@ body#indexBody {
   background-image: url("../img/bitcoin.jpg");
 }
 
-#logo {
+img#logo {
     max-height: 50px;
     max-width: 50px;
 }
