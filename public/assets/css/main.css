@@ -12,6 +12,6 @@
     float: left;
 }
 
-#indexBody {
-    background-image: url("assets/img/bitcoin.jpg");
+body {
+    background-image:url("../img/bitcoin.jpg") ;
 }
