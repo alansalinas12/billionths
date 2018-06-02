@@ -28,8 +28,7 @@ module.exports = function (app, passport) {
             failureRedirect: '/'
         }),
         function (req, res) {
-
-            res.redirect('/profile');
+            res.redirect('/dashboard');
         });
                  
 
