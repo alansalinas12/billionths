@@ -99,6 +99,8 @@ $(document).ready(function () {
             };
 
             $("#cashAvailable").html("$ " + updatedUser.money);
+
+            //Holdings
             $("#btc").html("BTC: " + updatedUser.BTC);
             $("#ltc").html("LTC: " + updatedUser.LTC);
             $("#xrp").html("XRP: " + updatedUser.XRP);
@@ -109,7 +111,26 @@ $(document).ready(function () {
             $("#bch").html("BCH: " + updatedUser.BCH);
             $("#trx").html("TRX: " + updatedUser.TRX);
             $("#ada").html("ADA: " + updatedUser.ADA);
+
+            portfolioWorthUpdate();
         });
+    }
+
+    function portfolioWorthUpdate(event) {
+        var btcWorth = updatedUser.BTC * cryptos[1].quotes.USD.price;
+        var ltcWorth = updatedUser.LTC * cryptos[2].quotes.USD.price;
+        var xrpWorth = updatedUser.XRP * cryptos[52].quotes.USD.price;
+        var xlmWorth = updatedUser.XLM * cryptos[512].quotes.USD.price;
+        var ethWorth = updatedUser.ETH * cryptos[1027].quotes.USD.price;
+        var miotaWorth = updatedUser.MIOTA * cryptos[1720].quotes.USD.price;
+        var eosWorth = updatedUser.EOS * cryptos[1765].quotes.USD.price;
+        var bchWorth = updatedUser.BCH * cryptos[1831].quotes.USD.price;
+        var trxWorth = updatedUser.TRX * cryptos[1958].quotes.USD.price;
+        var adaWorth = updatedUser.ADA * cryptos[2010].quotes.USD.price;
+
+        var portfolioWorth = btcWorth + ltcWorth + xrpWorth + xlmWorth + ethWorth + miotaWorth + eosWorth + bchWorth + trxWorth + adaWorth;
+
+        $("#portfolioWorth").html("$ " + portfolioWorth);
     }
 
     function updateUserHoldings(event) {
