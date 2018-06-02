@@ -137,7 +137,9 @@ $(document).ready(function () {
             $("#trx").html("TRX: " + updatedUser.TRX);
             $("#ada").html("ADA: " + updatedUser.ADA);
 
-        }).then(displayWorth);
+            }).then(function () {
+                displayWorth();
+            });
     }
 
     function updateUserHoldings(event) {
