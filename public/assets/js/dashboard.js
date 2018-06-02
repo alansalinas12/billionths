@@ -34,7 +34,6 @@ $(document).ready(function () {
         getTransactions();
     });
 
-    var interval = setInterval(displayWorth, 3000);
 
     var transactions = [];
     var updatedUser;
@@ -154,8 +153,6 @@ $(document).ready(function () {
     // This function inserts a new transactions into our database
     function buyTransaction(event) {
         event.preventDefault();
-
-        clearInterval(interval);
 
         coinAmount = $("#coinAmount").val();
 
