@@ -15,3 +15,7 @@ hr.coinHolderTop {
 hr.coinHolderBottom {
     margin-bottom: 5px;
 }
+
+.coindrop {
+    max-width: 50%;
+}
