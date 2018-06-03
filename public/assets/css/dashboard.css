@@ -5,3 +5,13 @@
 .ticker {
     max-height: 20px;
 }
+
+hr.coinHolderTop {
+    margin-top: 35px;
+    margin-bottom: 0px;
+    padding-top: 5px;
+}
+
+hr.coinHolderBottom {
+    margin-bottom: 5px;
+}
