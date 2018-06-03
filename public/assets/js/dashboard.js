@@ -34,6 +34,9 @@ $(document).ready(function () {
         getTransactions();
     });
 
+    // Refresh ticker every minute
+
+    var interval = setInterval(displayWorth, 60000)
 
     var transactions = [];
     var updatedUser;
